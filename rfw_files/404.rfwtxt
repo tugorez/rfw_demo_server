@@ -1,0 +1,21 @@
+import core.widgets;
+import material;
+import local;
+
+widget Main = Scaffold(
+  appBar: AppBar(
+    title: Text(text: 'RFW Demo App'),
+  ),
+  body: Center(
+    child: Column(
+      children: [
+        Text(text: 'Not Found :/'),
+        TextButton(
+          child: Text(text: 'Go back to the home page'),
+          onPressed: event "changePath" {path: '/index.rfwtxt'},
+        ),
+      ],
+    ),
+  ),
+);
+
