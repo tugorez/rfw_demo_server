@@ -17,9 +17,40 @@ widget Main = Scaffold(
   ),
 );
 
-widget _AppBar = AppBar(title: Text(text: 'Gemini'));
+widget _AppBar = AppBar(
+  title: Text(text: 'Gemini'),
+);
 
-widget _Drawer = Drawer(child: Container());
+widget _Drawer = Drawer(
+  child: ListView(
+    children: [
+      ListTile(
+        title: Text(text: 'Help'),
+        onTap: event "navigator" {
+          actions: [
+            {action: "pop"},
+            {action: "showBottomModal", widget: "HelpBottomSheet"},
+          ],
+        },
+      ),
+      ListTile(
+        title: Text(text: 'Activity'),
+      ),
+      ListTile(
+        title: Text(text: 'Settings'),
+      ),
+    ],
+  ),
+);
+
+widget HelpBottomSheet = Container(
+  child: Center(
+    child: TextButton(
+      child: Text(text: "It works!"),
+      onPressed: event "navigator" {actions: [{action: "pop"}]},
+    ),
+  ),
+);
 
 widget Hello = Text(text: 'Hello Juan');
 
