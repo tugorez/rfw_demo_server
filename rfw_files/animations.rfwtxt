@@ -26,6 +26,10 @@ widget Main = Scaffold(
           title: 'AnimatedScale',
           child: FancyAnimatedScale(),
         ),
+        Demo(
+          title: 'TweenAnimationBuilder',
+          child: FancyTweenAnimationBuilder(),
+        ),
       ],
     ),
   ),
@@ -58,11 +62,11 @@ widget FancyAnimatedContainer {down: false} = GestureDetector(
       true: 0xFFF44336,
     },
     width: switch state.down {
-      false: 250,
+      false: 250.0,
       true: 300,
     },
     height: switch state.down {
-      false: 250,
+      false: 250.0,
       true: 300,
     },
     child: Center(
@@ -84,8 +88,8 @@ widget FancyAnimatedAlign {alignment: 'topRight'} = GestureDetector(
     'topLeft': 'topRight',
   },
   child: Container(
-    width: 250,
-    height: 250,
+    width: 250.0,
+    height: 250.0,
     color: 0xFFCDDC39,
     child: AnimatedAlign(
       alignment: {
@@ -113,8 +117,8 @@ widget FancyAnimatedDefaultTextStyle {toggle: false} = GestureDetector(
     false: true,
   },
   child: Container(
-    width: 250,
-    height: 250,
+    width: 250.0,
+    height: 250.0,
     color: 0xFF2196F3,
     child: Center(
       child: AnimatedDefaultTextStyle(
@@ -142,8 +146,8 @@ widget FancyAnimatedScale {scale: 0.5} = GestureDetector(
     1: 0.5,
   },
   child: Container(
-    width: 250,
-    height: 250,
+    width: 250.0,
+    height: 250.0,
     color: 0xFFCDDC39,
     child: AnimatedScale(
       scale: state.scale,
@@ -152,3 +156,36 @@ widget FancyAnimatedScale {scale: 0.5} = GestureDetector(
   ),
 );
 
+widget FancyTweenAnimationBuilder {action: 'grow'} = GestureDetector(
+  onTap: set state.action = switch state.action {
+    'grow': 'shrink',
+    'shrink': 'grow',
+  },
+  child: Container(
+    width: 250.0,
+    height: 250.0,
+    child: Stack(
+      children: [
+        Center(
+          child: TweenAnimationBuilder(
+            begin: switch state.action {
+              'grow': 0.0,
+              'shrink': 250.0,
+            },
+            end: switch state.action {
+              'grow': 250.0,
+              'shrink': 0.0,
+            },
+            duration: 2000,
+            builder: (result) => Container(
+              width: result.value,
+              height: result.value,
+              color: 0xFF2196F3,
+            ),
+          ),
+        ),
+        Center(child: Text(text: 'Tap')),
+      ],
+    ),
+  ),
+);
