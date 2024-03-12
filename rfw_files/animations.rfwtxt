@@ -6,29 +6,27 @@ widget Main = Scaffold(
   appBar: _AppBar(),
   body:  Padding(
     padding: [20.0, 20.0],
-    child: Expanded(
-      child: Wrap(
-        spacing: 10,
-        runSpacing: 10,
-        children: [
-          Demo(
-            title: 'AnimatedContainer',
-            child: FancyAnimatedContainer(),
-          ),
-          Demo(
-            title: 'AnimatedAlign',
-            child: FancyAnimatedAlign(),
-          ),
-          Demo(
-            title: 'AnimatedDefaultTextStyle',
-            child: FancyAnimatedDefaultTextStyle(),
-          ),
-          Demo(
-            title: 'AnimatedScale',
-            child: FancyAnimatedScale(),
-          ),
-        ],
-      ),
+    child: Wrap(
+      spacing: 10,
+      runSpacing: 10,
+      children: [
+        Demo(
+          title: 'AnimatedContainer',
+          child: FancyAnimatedContainer(),
+        ),
+        Demo(
+          title: 'AnimatedAlign',
+          child: FancyAnimatedAlign(),
+        ),
+        Demo(
+          title: 'AnimatedDefaultTextStyle',
+          child: FancyAnimatedDefaultTextStyle(),
+        ),
+        Demo(
+          title: 'AnimatedScale',
+          child: FancyAnimatedScale(),
+        ),
+      ],
     ),
   ),
 );
