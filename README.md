@@ -1,49 +1,22 @@
-A server app built using [Shelf](https://pub.dev/packages/shelf),
-configured to enable running with [Docker](https://www.docker.com/).
-
-This sample code handles HTTP GET requests to `/` and `/echo/<message>`
-
-# Running the sample
+# RFW demo server.
 
 ## Running with the Dart SDK
 
-You can run the example with the [Dart SDK](https://dart.dev/get-dart)
-like this:
+You can run the server like this:
 
 ```
 $ dart run bin/server.dart
 Server listening on port 8080
 ```
 
-And then from a second terminal:
-```
-$ curl http://0.0.0.0:8080
-Hello, World!
-$ curl http://0.0.0.0:8080/echo/I_love_Dart
-I_love_Dart
-```
-
-## Running with Docker
-
-If you have [Docker Desktop](https://www.docker.com/get-started) installed, you
-can build and run with the `docker` command:
+then clone the client app 
 
 ```
-$ docker build . -t myserver
-$ docker run -it -p 8080:8080 myserver
-Server listening on port 8080
+$ git clone https://github.com/tugorez/rfw_demo_app.git
 ```
 
-And then from a second terminal:
-```
-$ curl http://0.0.0.0:8080
-Hello, World!
-$ curl http://0.0.0.0:8080/echo/I_love_Dart
-I_love_Dart
-```
+and run it 
 
-You should see the logging printed in the first terminal:
 ```
-2021-05-06T15:47:04.620417  0:00:00.000158 GET     [200] /
-2021-05-06T15:47:08.392928  0:00:00.001216 GET     [200] /echo/I_love_Dart
+$ cd rfw_demo_app && flutter pub install && flutter run -d web-server --web-port=8090
 ```
