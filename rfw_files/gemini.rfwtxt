@@ -1,0 +1,60 @@
+import core.widgets;
+import material;
+import local;
+
+widget Main = Scaffold(
+  appBar: _AppBar(),
+  drawer: _Drawer(),
+  body: Padding(
+    padding: [20.0, 20.0],
+    child: Column(
+      children: [
+        Hello(),
+        Expanded(child: Container()),
+        Footer(),
+      ],
+    ),
+  ),
+);
+
+widget _AppBar = AppBar(
+  title: Text(text: 'Gemini'),
+);
+
+widget _Drawer = Drawer(
+  child: ListView(
+    children: [
+      ListTile(
+        title: Text(text: 'Help'),
+        onTap: event "navigator" {
+          actions: [
+            {action: "pop"},
+            {action: "showBottomModal", widget: "HelpBottomSheet"},
+          ],
+        },
+      ),
+      ListTile(
+        title: Text(text: 'Activity'),
+      ),
+      ListTile(
+        title: Text(text: 'Settings'),
+      ),
+    ],
+  ),
+);
+
+widget HelpBottomSheet = Container(
+  child: Center(
+    child: TextButton(
+      child: Text(text: "It works!"),
+      onPressed: event "navigator" {actions: [{action: "pop"}]},
+    ),
+  ),
+);
+
+widget Hello = Text(text: 'Hello Juan');
+
+widget Footer = Text(
+  text: 'Gemini may display innacurate info, including about people so double-check its responses',
+  textAlign: 'center',
+);

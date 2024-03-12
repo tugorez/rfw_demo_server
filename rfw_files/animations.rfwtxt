@@ -4,24 +4,17 @@ import local;
 
 widget Main = Scaffold(
   appBar: _AppBar(),
-  body: Center(
+  body: Padding(
+    padding: [20.0, 20.0],
     child: Column(
       children: [
        TextButton(
           child: Text(text: 'Animations'),
-          onPressed: event "navigator" {
-            actions: [
-              {action: "push", path: "animations", widget: "Main"},
-            ],
-          },
+          onPressed: event "changePath" {path: '/animations.rfwtxt'},
         ),
         TextButton(
           child: Text(text: 'Gemini'),
-          onPressed: event "navigator" {
-            actions: [
-              {action: "push", path: "gemini", widget: "Main"},
-            ],
-          },
+          onPressed: event "changePath" {path: '/gemini.rfwtxt'},
         ),
       ],
     ),
