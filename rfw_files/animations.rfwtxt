@@ -4,23 +4,153 @@ import local;
 
 widget Main = Scaffold(
   appBar: _AppBar(),
-  body: Padding(
+  body:  Padding(
     padding: [20.0, 20.0],
-    child: Column(
-      children: [
-       TextButton(
-          child: Text(text: 'Animations'),
-          onPressed: event "changePath" {path: '/animations.rfwtxt'},
-        ),
-        TextButton(
-          child: Text(text: 'Gemini'),
-          onPressed: event "changePath" {path: '/gemini.rfwtxt'},
-        ),
-      ],
+    child: Expanded(
+      child: Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: [
+          Demo(
+            title: 'AnimatedContainer',
+            child: FancyAnimatedContainer(),
+          ),
+          Demo(
+            title: 'AnimatedAlign',
+            child: FancyAnimatedAlign(),
+          ),
+          Demo(
+            title: 'AnimatedDefaultTextStyle',
+            child: FancyAnimatedDefaultTextStyle(),
+          ),
+          Demo(
+            title: 'AnimatedScale',
+            child: FancyAnimatedScale(),
+          ),
+        ],
+      ),
     ),
   ),
 );
 
 widget _AppBar = AppBar(
-  title: Text(text: 'RFW Gallery'),
+  title: Text(text: 'Animations'),
 );
+
+widget Demo = Container(
+  decoration: {
+    type: 'box',
+    border: [{x: 0}],
+  },
+  child: Column(
+    children: [
+      Text(text: args.title),
+      args.child,
+    ]
+  ),
+);
+
+widget FancyAnimatedContainer {down: false} = GestureDetector(
+  onTapDown: set state.down = true,
+  onTapUp: set state.down = false,
+  onTapCancel: set state.down = false,
+  child: Container(
+    color: switch state.down {
+      false: 0xFF2196F3,
+      true: 0xFFF44336,
+    },
+    width: switch state.down {
+      false: 250,
+      true: 300,
+    },
+    height: switch state.down {
+      false: 250,
+      true: 300,
+    },
+    child: Center(
+      child: Text(
+        text: switch state.down {
+          false: 'Press and hold',
+          true: 'Release',
+        },
+      ),
+    ),
+  ),
+);
+
+widget FancyAnimatedAlign {alignment: 'topRight'} = GestureDetector(
+  onTap: set state.alignment = switch state.alignment {
+    'topRight': 'bottomRight',
+    'bottomRight': 'bottomLeft',
+    'bottomLeft': 'topLeft',
+    'topLeft': 'topRight',
+  },
+  child: Container(
+    width: 250,
+    height: 250,
+    color: 0xFFCDDC39,
+    child: AnimatedAlign(
+      alignment: {
+        x: switch state.alignment {
+          'topRight': 1,
+          'bottomRight': 1,
+          'bottomLeft': -1,
+          'topLeft': -1,
+        },
+        y: switch state.alignment {
+          'topRight': -1,
+          'bottomRight': 1,
+          'bottomLeft': 1,
+          'topLeft': -1,
+        },
+      },
+      child: FlutterLogo(size: 50),
+    ),
+  ),
+);
+
+widget FancyAnimatedDefaultTextStyle {toggle: false} = GestureDetector(
+  onTap: set state.toggle = switch state.toggle {
+    true: false,
+    false: true,
+  },
+  child: Container(
+    width: 250,
+    height: 250,
+    color: 0xFF2196F3,
+    child: Center(
+      child: AnimatedDefaultTextStyle(
+        style: switch state.toggle {
+          false: {
+            fontSize: 15,
+          },
+          true: {
+            color: 0xFFFFFFFF,
+            fontFamily: 'GoogleSansFlex',
+            fontSize: 50,
+            fontWeight: 'bold',
+          },
+        },
+        child: Text(text: 'Tap!'),
+      ),
+    ),
+  ),
+);
+
+
+widget FancyAnimatedScale {scale: 0.5} = GestureDetector(
+  onTap: set state.scale = switch state.scale {
+    0.5: 1,
+    1: 0.5,
+  },
+  child: Container(
+    width: 250,
+    height: 250,
+    color: 0xFFCDDC39,
+    child: AnimatedScale(
+      scale: state.scale,
+      child: FlutterLogo(),
+    ),
+  ),
+);
+
